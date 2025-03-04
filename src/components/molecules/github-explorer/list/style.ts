@@ -1,6 +1,13 @@
 import { AsSxObject } from '~src/lib/types/asSxObject.type';
 
 export const RepoItemSx = AsSxObject({
+  root: {
+    borderRadius: '8px',
+  },
+  accordionTrigger: {
+    background: '#EEE',
+    borderRadius: '8px',
+  },
   repoListWrapper: {
     display: 'flex',
     flexDirection: 'column',
@@ -8,15 +15,18 @@ export const RepoItemSx = AsSxObject({
   },
   repoListItem: {
     padding: '16px',
-    background: '#DDD',
+    background: '#EEE',
     borderRadius: '8px',
     display: 'flex',
     flexDirection: 'column',
     gap: 1,
   },
-  repoTitle: {
+  repoTitleWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
+    fontWeight: 500,
+  },
+  repoTitle: {
     fontWeight: 500,
   },
   repoStar: {

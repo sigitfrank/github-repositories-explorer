@@ -1,54 +1,102 @@
-# React + TypeScript + Vite
+# GitHub Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+GitHub Explorer is a web application built with Vite and React, designed to explore GitHub profiles and repositories with a fast and modern tech stack.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Vite**: Lightning-fast development environment.
+- **React**: UI library for building interactive interfaces.
+- **TypeScript**: Strongly typed JavaScript for better code quality.
+- **Material UI**: Modern and customizable component library.
+- **React Query**: Powerful asynchronous state management.
+- **Zustand**: Simple and scalable state management.
+- **Formik**: Form handling and validation.
+- **Yup**: Schema-based form validation.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Search GitHub users.
+- View user repository list details.
+- Form-based search with validation.
+- Query params search.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Getting Started
+
+### Prerequisites
+
+- Node.js >= 18.x
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/sigitfrank/github-explorer.git
+
+# Navigate into the project directory
+cd github-explorer
+
+# Install dependencies
+npm install
+# or
+yarn install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running the App
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+# Start the development server
+npm run dev
+# or
+yarn dev
 ```
+
+The app will be available at [http://localhost:5173](http://localhost:5173).
+
+### Building the App
+
+```bash
+# Build the app for production
+npm run build
+# or
+yarn build
+```
+
+### Linting and Formatting
+
+```bash
+# Run linter
+yarn lint 
+# or
+npm run lint 
+
+# Format code
+yarn prettier:write
+# or
+npm run prettier:write
+```
+
+## Project Structure
+
+```bash
+.github-explorer
+|-- src
+|   |-- assets          # Static assets
+|   |-- components      # Reusable UI components
+|   |   |-- atoms       # Basic building blocks
+|   |   |-- molecules   # Combinations of atoms
+|   |   |-- organisms   # Complex UI components
+|   |-- lib             # Libraries, hooks, api, schemas and types
+|   |-- App.tsx        # Main app component
+|-- public             # Static assets
+|-- index.html         # Entry HTML file
+|-- vite.config.ts     # Vite configuration
+```
+
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+Happy coding! 🚀

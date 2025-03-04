@@ -10,6 +10,10 @@ export const appApiAxiosInstance = axios.create({
 
 appApiAxiosInstance.interceptors.request.use(async (config) => {
   try {
+    if (!config.headers.Authorization && env.githubToken) {
+      config.headers.Authorization = `Bearer ${env.githubToken}`;
+    }
+
     return config;
   } catch (error) {
     console.error('Error in axios interceptor', error);

@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { queryKeys } from '../react-query/queryMutationKeys';
 import { useQuery } from '@tanstack/react-query';
 import {
@@ -8,18 +8,33 @@ import {
   SearchValuesSchema,
 } from '../schemas/search.schema';
 import { getUsers } from '../api/user.api';
+import { useSearchParams } from 'react-router-dom';
+import { useAppStore } from '../store/appStore';
 
 const useGithubExplorer = () => {
+  const { hasLoaded, setHasLoaded } = useAppStore();
+
   const usernameRef = useRef('');
-  const { values, touched, handleChange, errors, handleSubmit } =
-    useFormik<SearchValues>({
-      initialValues: searchInitialValues,
-      onSubmit: async (values) => {
-        usernameRef.current = values.username;
-        refetch();
-      },
-      validationSchema: SearchValuesSchema,
-    });
+  const [searchParams, setSearchParams] = useSearchParams();
+  const qStateUsername = searchParams.get('username');
+  const {
+    values,
+    touched,
+    handleChange,
+    errors,
+    setFieldValue,
+    handleSubmit,
+    submitForm,
+  } = useFormik<SearchValues>({
+    enableReinitialize: true,
+    initialValues: searchInitialValues,
+    onSubmit: async (values) => {
+      usernameRef.current = values.username;
+      setSearchParams({ username: values.username });
+      refetch();
+    },
+    validationSchema: SearchValuesSchema,
+  });
 
   const {
     data: userData,
@@ -38,6 +53,18 @@ const useGithubExplorer = () => {
     queryKey: [queryKeys.getUsers],
     enabled: false,
   });
+
+  useEffect(() => {
+    if (!qStateUsername) return;
+    setFieldValue('username', qStateUsername);
+  }, [qStateUsername, setFieldValue]);
+
+  useEffect(() => {
+    if (hasLoaded) return;
+    if (values.username !== qStateUsername || !qStateUsername) return;
+    submitForm();
+    setHasLoaded(true);
+  }, [values.username, qStateUsername, hasLoaded, setHasLoaded, submitForm]);
 
   const similiarUsersWithUsername = useMemo(
     () =>

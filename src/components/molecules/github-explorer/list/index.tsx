@@ -8,45 +8,69 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Star } from '@mui/icons-material';
 import { RepoItemSx as sx } from './style';
+import { useQuery } from '@tanstack/react-query';
+import { getUserRepositories } from '~src/lib/api/repository.api';
+import { queryKeys } from '~src/lib/react-query/queryMutationKeys';
+import SkeletonList from '~src/components/atoms/skeleton-list';
+import { memo } from 'react';
 
 type RepoItemProps = {
   name: string;
 };
-const RepoItem = ({ name }: RepoItemProps) => {
+const UserItem = memo(({ name }: RepoItemProps) => {
+  const { data: repositories, isFetching: gettingRepository } = useQuery({
+    queryFn: () =>
+      getUserRepositories({
+        username: name,
+      }),
+    queryKey: [queryKeys.getUserRepositories, { name }],
+    enabled: Boolean(name),
+  });
+
+  const userRepositories = repositories ?? [];
+
   return (
-    <Accordion>
+    <Accordion sx={sx.root}>
       <AccordionSummary
+        sx={sx.accordionTrigger}
         expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1-content"
-        id="panel1-header"
+        aria-controls="repo-content"
+        id="repo-header"
       >
         <Typography component="span">{name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Box sx={sx.repoListWrapper}>
-          {[1, 2, 3].map((repo) => {
-            return (
-              <Box key={repo} sx={sx.repoListItem}>
-                <Box sx={sx.repoTitle}>
-                  <Typography component="h2">Repository Title</Typography>
-                  <Typography sx={sx.repoStar}>
-                    12
-                    <Star />
-                  </Typography>
+        {gettingRepository ? (
+          <SkeletonList count={3} />
+        ) : (
+          <Box sx={sx.repoListWrapper}>
+            {userRepositories.length === 0 ? (
+              <Typography>-No Repositories-</Typography>
+            ) : (
+              userRepositories.map((repository) => (
+                <Box key={repository.id} sx={sx.repoListItem}>
+                  <>
+                    <Box sx={sx.repoTitleWrapper}>
+                      <Typography component="h2" sx={sx.repoTitle}>
+                        {repository.name}
+                      </Typography>
+                      <Typography sx={sx.repoStar}>
+                        {repository.stargazers_count}
+                        <Star />
+                      </Typography>
+                    </Box>
+                    <Typography>
+                      {repository.description ?? '-No Description-'}
+                    </Typography>
+                  </>
                 </Box>
-                <Typography>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Molestias voluptatem modi laudantium totam, nesciunt tempora
-                  voluptatum porro aliquam quibusdam, corporis, animi commodi?
-                  Eaque maiores, dolorem soluta magnam error id dignissimos?
-                </Typography>
-              </Box>
-            );
-          })}
-        </Box>
+              ))
+            )}
+          </Box>
+        )}
       </AccordionDetails>
     </Accordion>
   );
-};
+});
 
-export default RepoItem;
+export default UserItem;

@@ -2,8 +2,8 @@ import { Box, Typography } from '@mui/material';
 import { GithubExplorerSx as sx } from './style';
 import SkeletonList from '~src/components/atoms/skeleton-list';
 import GithubExplorerToolbar from '~src/components/molecules/github-explorer/toolbar';
-import RepoItem from '~src/components/molecules/github-explorer/list';
 import useGithubExplorer from '~src/lib/hooks/use-github-explorer';
+import UserItem from '~src/components/molecules/github-explorer/list';
 
 const GithubExplorer = () => {
   const {
@@ -36,7 +36,7 @@ const GithubExplorer = () => {
             <SkeletonList count={5} />
           ) : (
             similiarUsersWithUsername?.map((user) => {
-              return <RepoItem name={user.login} key={user.id} />;
+              return <UserItem name={user.login} key={user.id} />;
             })
           )}
         </Box>

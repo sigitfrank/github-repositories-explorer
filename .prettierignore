@@ -8,3 +8,5 @@ vite.config.*
 yarn.*
 .prettierignore
 .gitignore
+package.json
+*d.ts
