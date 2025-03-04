@@ -1,3 +1,4 @@
 export const queryKeys = {
-  getRepository: 'getRepository',
+  getUsers: 'getUsers',
+  getUserRepositories: 'getUserRepositories',
 };
