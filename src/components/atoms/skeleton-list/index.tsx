@@ -14,6 +14,7 @@ const SkeletonList = ({ count = 1, ...rest }: SkeletonListProps) => {
           height: '64px',
         }}
         {...rest}
+        data-testid="skeleton"
       />
     );
   });

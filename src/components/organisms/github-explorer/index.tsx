@@ -3,7 +3,7 @@ import { GithubExplorerSx as sx } from './style';
 import SkeletonList from '~src/components/atoms/skeleton-list';
 import GithubExplorerToolbar from '~src/components/molecules/github-explorer/toolbar';
 import useGithubExplorer from '~src/lib/hooks/use-github-explorer';
-import UserItem from '~src/components/molecules/github-explorer/list';
+import UserAccordion from '~src/components/molecules/github-explorer/user-accordion';
 
 const GithubExplorer = () => {
   const {
@@ -36,7 +36,7 @@ const GithubExplorer = () => {
             <SkeletonList count={5} />
           ) : (
             similiarUsersWithUsername?.map((user) => {
-              return <UserItem name={user.login} key={user.id} />;
+              return <UserAccordion name={user.login} key={user.id} />;
             })
           )}
         </Box>

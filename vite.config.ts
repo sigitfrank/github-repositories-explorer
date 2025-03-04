@@ -7,7 +7,13 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '~src': path.resolve(__dirname, './src'),
+      '~src': path.resolve(__dirname, 'src'),
     },
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './test/vitest.setup.ts',
+    include: ['src/**/*.test.{ts,tsx}'],
   },
 });

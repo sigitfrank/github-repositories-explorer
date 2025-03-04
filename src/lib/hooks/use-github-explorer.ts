@@ -9,7 +9,7 @@ import {
 } from '../schemas/search.schema';
 import { getUsers } from '../api/user.api';
 import { useSearchParams } from 'react-router-dom';
-import { useAppStore } from '../store/appStore';
+import { useAppStore } from '~src/lib/store/appStore';
 
 const useGithubExplorer = () => {
   const { hasLoaded, setHasLoaded } = useAppStore();

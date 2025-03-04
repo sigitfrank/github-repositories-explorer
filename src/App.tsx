@@ -10,7 +10,7 @@ const App = () => {
       justifyContent="center"
       height="100%"
     >
-      <Grid2 size={{ md: 6 }}>
+      <Grid2 size={{ xs: 12, sm: 8, lg: 6 }}>
         <GithubExplorer />
       </Grid2>
     </Grid2>

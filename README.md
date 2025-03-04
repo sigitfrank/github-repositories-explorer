@@ -2,6 +2,10 @@
 
 GitHub Explorer is a web application built with Vite and React, designed to explore GitHub profiles and repositories with a fast and modern tech stack.
 
+## Video Demo
+
+Check out the video demo of the app here: [GitHub Explorer Demo](<https://drive.google.com/file/d/1I4a5tZ0g9hn2hEyFk3u4GKs8-mCY4Duv/view?usp=sharing>)
+
 ## Tech Stack
 
 - **Vite**: Lightning-fast development environment.
