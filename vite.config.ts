@@ -10,6 +10,7 @@ export default defineConfig({
       '~src': path.resolve(__dirname, 'src'),
     },
   },
+  base: './',
   test: {
     environment: 'jsdom',
     globals: true,
